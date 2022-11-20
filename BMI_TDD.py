@@ -1,6 +1,13 @@
 def testInput():
-    height = float(input("Enter your height in cm: "))
-    weight = float(input("Enter your weight in kg: "))
+    # ValueError bypass
+    while True:
+        try:
+            height = float(input("Enter your height in cm: "))
+            weight = float(input("Enter your weight in kg: "))
+        except ValueError:
+            print('The provided value is not a float')
+        else:
+            break
     if height < 0 or weight < 0:
         return False
     else:
