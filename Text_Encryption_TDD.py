@@ -5,12 +5,14 @@ def testInput():
     else:
         return False
 
+
 def textFix(text):
     if not text.isalpha():
         for i in range(len(text)):
             if 90 < ord(text[i]) < 97 or ord(text[i]) > 122:
                 text = text.replace(chr(ord(text[i])), chr(ord(text[i]) - 26))
         return text
+
 
 text = testInput()
 if text:
