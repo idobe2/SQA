@@ -3,18 +3,63 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Random random = new Random();
-        int[] arr_0 = new int[0], arr_1 = new int[1], arr_2 = new int[2];
-        System.out.println("test array is empty: " + sumPositive(arr_0)); // Not entered
-        Arrays.setAll(arr_1, i -> random.nextInt(-10,10));
-        System.out.println("test array size is 1: " + sumPositive(arr_1)); // Entered 1 time
-        Arrays.setAll(arr_2, i -> random.nextInt(-10, 10));
-        System.out.println("test array size is 2: " + sumPositive(arr_2)); // Entered 2 time
-        if (test(0, sumPositive(arr_0)) && test(Math.max(arr_1[0],0),sumPositive(arr_1))
-                && test((Math.max(arr_2[0],0)+Math.max(arr_2[1],0)),sumPositive(arr_2)))
-            System.out.println("Expected result!"); }
+        int passed = 0;
+        for (int n=0; n<3; n++) // n = array length
+            if (runTest(n)) {
+                passed++;
+                showMessage(0);
+            }
+        if (passed==3) showMessage(3);
+    }
 
-    public static boolean test(int test1, int test2) { return test1 == test2; }
+    public static boolean runTest(int length) {
+        int[] arr = new int[length];
+        Random random = new Random();
+        int exp;
+        switch (length)
+        {
+            case 0:
+                if (isEqual(sumPositive(arr),exp=0))
+                    return true;
+                else showMessage(1);
+                break;
+            case 1:
+                Arrays.setAll(arr, i -> random.nextInt(-10, 10));
+                if (isEqual(sumPositive(arr),exp = Math.max(sumPositive(arr), arr[0])))
+                    return true;
+                else showMessage(1);
+                break;
+            case 2:
+                Arrays.setAll(arr, i -> random.nextInt(-10, 10));
+                if (isEqual(sumPositive(arr),exp = Math.max(sumPositive(arr), arr[0]+arr[1])))
+                    return true;
+                else showMessage(1);
+                break;
+            default:
+                break;
+        }
+        return false;
+    }
+
+    public static void showMessage(int msg_id) {
+        switch (msg_id)
+        {
+            case 0:
+                System.out.println("Passed!");
+                break;
+            case 1:
+                System.out.println("Failed!");
+                break;
+            case 3:
+                System.out.println("All tests passed!");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static boolean isEqual(Object value1, Object value2) { return value1 == value2; }
+
     public static int sumPositive(int arr[])
     {
         int sum = 0;
@@ -25,5 +70,4 @@ public class Main {
         }
         return sum;
     }
-
 }
