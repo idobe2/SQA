@@ -1,3 +1,5 @@
+package Test;
+
 public class sumPositive {
     public static int sumPositive(int arr[])
     {
