@@ -8,8 +8,8 @@ public class Main {
             if (runTest(n)) {
                 passed++;
                 showMessage(0);
-            }
-        if (passed==3) showMessage(3);
+            } else showMessage(1);
+        if (passed==3) showMessage(100);
     }
 
     public static boolean runTest(int length) {
@@ -21,19 +21,16 @@ public class Main {
             case 0:
                 if (isEqual(sumPositive(arr),exp=0))
                     return true;
-                else showMessage(1);
                 break;
             case 1:
                 Arrays.setAll(arr, i -> random.nextInt(-10, 10));
                 if (isEqual(sumPositive(arr),exp = Math.max(sumPositive(arr), arr[0])))
                     return true;
-                else showMessage(1);
                 break;
             case 2:
                 Arrays.setAll(arr, i -> random.nextInt(-10, 10));
                 if (isEqual(sumPositive(arr),exp = Math.max(sumPositive(arr), arr[0]+arr[1])))
                     return true;
-                else showMessage(1);
                 break;
             default:
                 break;
@@ -50,7 +47,7 @@ public class Main {
             case 1:
                 System.out.println("Failed!");
                 break;
-            case 3:
+            case 100:
                 System.out.println("All tests passed!");
                 break;
             default:
