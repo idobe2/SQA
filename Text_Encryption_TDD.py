@@ -1,24 +1,26 @@
-def testInput():
-    text = input("Enter your text:\n")
-    if text.isalpha():
-        return text
+def test_input():  # Step 1: Test func for the input
+    new_text = input("Enter your text:\n")
+    if new_text.isalpha():
+        return new_text
     else:
         return False
 
 
-def textFix(text):
-    if not text.isalpha():
-        for i in range(len(text)):
-            if 90 < ord(text[i]) < 97 or ord(text[i]) > 122:
-                text = text.replace(chr(ord(text[i])), chr(ord(text[i]) - 26))
-        return text
+# Step 3: New function has been added to fix last letters encryption
+def correction(en_text):
+    if not en_text.isalpha():
+        for c in range(len(en_text)):
+            if 90 < ord(en_text[c]) < 97 or ord(en_text[c]) > 122:
+                en_text = en_text.replace(chr(ord(en_text[c])), chr(ord(en_text[c]) - 26))
+        return en_text
 
 
-text = testInput()
+# Step 2: Run test function
+text = test_input()
 if text:
     for i in range(len(text)):
         text = text[:i] + chr(ord(text[i]) + 3) + text[i + 1:]
-    text = textFix(text)
+    text = correction(text)
     print(text)
 else:
     print("All characters in the text should be alphabets!")
