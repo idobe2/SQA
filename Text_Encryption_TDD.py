@@ -1,26 +1,21 @@
-def test_input():  # Step 1: Test func for the input
-    new_text = input("Enter your text:\n")
-    if new_text.isalpha():
-        return new_text
-    else:
-        return False
+import unittest
+from Text_Encryption import test_input
 
 
-# Step 3: New function has been added to fix last letters encryption
-def correction(en_text):
-    if not en_text.isalpha():
-        for c in range(len(en_text)):
-            if 90 < ord(en_text[c]) < 97 or ord(en_text[c]) > 122:
-                en_text = en_text.replace(chr(ord(en_text[c])), chr(ord(en_text[c]) - 26))
-        return en_text
+class BMI_TDD(unittest.TestCase):
+    def test_num(self):
+        ex_res = False
+        self.assertEqual((test_input("AbCd1234")), False)
+        self.assertEqual((test_input("5678EfGh")), False)
+        self.assertEqual((test_input("a@1b#4c$5")), False)
 
+    def test_type(self):
+        with self.assertRaises(TypeError):
+            res = (test_input(0))
+        with self.assertRaises(TypeError):
+            res = (test_input(100))
+        with self.assertRaises(TypeError):
+            res = (test_input(123.456))
 
-# Step 2: Run test function
-text = test_input()
-if text:
-    for i in range(len(text)):
-        text = text[:i] + chr(ord(text[i]) + 3) + text[i + 1:]
-    text = correction(text)
-    print(text)
-else:
-    print("All characters in the text should be alphabets!")
+    if __name__ == '__main__':
+        unittest.main()

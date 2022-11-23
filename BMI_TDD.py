@@ -1,29 +1,23 @@
-def test_input():  # Step 1: Test func for the input
-    # Step 3: The function has been improved - Input error friendly
-    while True:
-        try:
-            height = float(input("Enter your height in cm: "))
-            weight = float(input("Enter your weight in kg: "))
-        except ValueError:
-            print('The provided value is not a float')
-        else:
-            break
-    if height <= 0 or weight <= 0:
-        return 0, 0
-    else:
-        return height, weight
+import unittest
+from BMI_calc import test_input
 
 
-# Step 2: Run test function
-(h,w) = test_input()
-if (h,w) == (0, 0):
-    print("Invalid input")
-else:
-    BMI = w / (h / 100) ** 2
-    print(f"Your BMI is {BMI}")
-    if BMI <= 18.5:
-        print("You are underweight.")
-    elif BMI <= 25:
-        print("You are healthy.")
-    else:
-        print("You are over weight.")
+class BMI_TDD(unittest.TestCase):
+    def test_num(self):
+        ex_h, ex_w = 0, 0
+        self.assertEqual((test_input(0, 0)), (ex_h, ex_w))
+        self.assertEqual((test_input(-175, 80)), (ex_h, ex_w))
+        self.assertEqual((test_input(165, -70)), (ex_h, ex_w))
+        self.assertEqual((test_input(-169, -72)), (ex_h, ex_w))
+        self.assertEqual((test_input(179, 85)), (179, 85))
+
+    def test_type(self):
+        with self.assertRaises(TypeError):
+            res_h, res_w = (test_input('T', 'd'))
+        with self.assertRaises(TypeError):
+            res_h, res_w = (test_input(':', '/'))
+        with self.assertRaises(TypeError):
+            res_h, res_w = (test_input('12ab', 'cd34'))
+
+    if __name__ == '__main__':
+        unittest.main()
