@@ -9,14 +9,17 @@ def test_input():  # Step 1: Test func for the input
         else:
             break
     if height <= 0 or weight <= 0:
-        return False
+        return 0, 0
     else:
-        return weight / (height / 100) ** 2
+        return height, weight
 
 
 # Step 2: Run test function
-BMI = test_input()
-if BMI:
+(h,w) = test_input()
+if (h,w) == (0, 0):
+    print("Invalid input")
+else:
+    BMI = w / (h / 100) ** 2
     print(f"Your BMI is {BMI}")
     if BMI <= 18.5:
         print("You are underweight.")
@@ -24,5 +27,3 @@ if BMI:
         print("You are healthy.")
     else:
         print("You are over weight.")
-else:
-    print("Invalid input")
